@@ -1,0 +1,131 @@
+/* CSS Document */
+
+#header-wrapper {
+    background: none repeat scroll 0 0 #1582AB;
+    border-bottom: 10px solid #2AA1CC;
+    height: 142px;
+}
+
+#header-wrapper h1 a{
+color:#FFFFFF;
+text-decoration: none;
+}
+
+#menu {
+float:left
+    height: 90px;
+    width: 450px;
+}
+
+#menu ul {
+    line-height: normal;
+    list-style: none outside none;
+    margin: 0;
+}
+
+
+#menu li {
+    float: left;
+}
+
+
+#menu a:hover, #menu .nowpage a {
+    background: none repeat scroll 0 0 #2AA1CC;
+    text-decoration: none;
+}
+
+#menu a {
+    border: medium none;
+    color: #FFFFFF;
+    display: block;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    margin-right: 1px;
+    padding: 10px 15px 15px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.bluebord {
+font-weight:bold;
+color:#1582AB;
+}
+
+.blue {
+color:#1582AB;
+}
+
+.graybord {
+font-weight:bold;
+color:#666666;
+}
+
+.gray {
+color:#666666;
+}
+
+.bord {
+font-weight:bold;
+}
+
+.red {
+color:#FF0000;
+}
+
+
+
+a {
+text-decoration: none;
+}
+
+a:hover {
+text-decoration:underline
+}
+
+a:focus {
+text-decoration:underline
+}
+
+.rb1, .rb2 {
+    background: none repeat scroll 0 0 #1582AB;
+    border-color: #FFFFFF #6A6A6A #6A6A6A #FFFFFF;
+    border-style: solid;
+    border-width: 1px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 14px;
+    height: 25px;
+    padding: 3px 10px;
+}
+
+.rb2 {
+    background: none repeat scroll 0 0 #C71E3A;
+}
+
+.gb1, .gb2 {
+    background: none repeat scroll 0 0 #E5E5E5;
+    border-color: #FFFFFF #6A6A6A #6A6A6A #FFFFFF;
+    border-left: 1px solid #FFFFFF;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    cursor: pointer;
+    font-size: 14px;
+    height: 25px;
+    padding: 3px 10px;
+}
+
+html, body {
+
+    background:url(images/gradient_texture20100901.jpg) repeat-x scroll 0 0 #F5F6F7;
+
+}
+
+.even {
+background:#e5ecf9;
+}
+
+.maintext {
+background-color:#FFFFFF;
+}
