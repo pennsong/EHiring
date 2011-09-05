@@ -101,20 +101,7 @@ class Enterprise_job extends CW_Controller
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->db->trans_start();
-			//处理多location,多degree
-			$tmpRes = $this->db->query("DELETE FROM T_Job_Location WHERE job_location_Job_id = {$this->input->post('jobId')}");
-			if (!$tmpRes)
-			{
-				$this->db->trans_complete();
-				show_error('1数据删除失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
-			}
 			$locationAddList = $this->input->post('location');
-			$tmpRes = $this->db->query("DELETE FROM T_Job_Degree WHERE job_degree_Job_id = {$this->input->post('jobId')}");
-			if (!$tmpRes)
-			{
-				$this->db->trans_complete();
-				show_error('2数据删除失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
-			}
 			$degreeAddList = $this->input->post('degree');
 			//call P_updateJob 更新职位信息
 			$tmpParam = array(
