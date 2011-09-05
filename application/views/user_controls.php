@@ -104,7 +104,7 @@
 		echo anchor(site_url('enterprise_home'), '首页');
 		echo "</li>";
 		echo "<li";
-		if ($nowPage == 'submitUpdate')
+		if ($nowPage == 'enterpriseSubmitUpdate')
 		echo ' class="nowpage" ';
 		echo ">";
 		echo anchor(site_url('enterprise_submit_update'), '动态');

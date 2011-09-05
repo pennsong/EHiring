@@ -19,11 +19,20 @@
 				</thead>
 				<tbody>
 				<?php
+				$tmpCount=0;
 				foreach ($submit_update_list as $submit_update)
 				{
-					echo "<tr>\n";
+					$tmpCount++;
+					if ($tmpCount % 2 == 0)
+					{
+						echo '<tr class="even">'."\n";
+					}
+					else
+					{
+						echo '<tr>'."\n";
+					}
 					echo "	<td><a href=\"\">{$submit_update['hunter_talent_job_Talent_name']}</a></td>\n";
-					echo "	<td>{$submit_update['job_Title']}</td>\n";					
+					echo "	<td>{$submit_update['job_Title']}</td>\n";
 					echo "	<td>{$submit_update['location_display']}</td>\n";
 					echo "	<td>{$submit_update['R_talent_city']}</td>\n";
 					echo "	<td>{$submit_update['R_age']}</td>\n";
@@ -66,9 +75,18 @@
 				</thead>
 				<tbody>
 				<?php
+				$tmpCount=0;
 				foreach ($jobs as $job)
 				{
-					echo "<tr>\n";
+					$tmpCount++;
+					if ($tmpCount % 2 == 0)
+					{
+						echo '<tr class="even">'."\n";
+					}
+					else
+					{
+						echo '<tr>'."\n";
+					}
 					echo "	<td><a href=\"\">{$job['job_Id']}</a>\n";
 					echo "	</td>\n";
 					echo "	<td><a href=\"\">{$job['job_Title']}</a>\n";
@@ -93,7 +111,7 @@
 				<tr>
 					<td><a href="">更多职位</a>
 					</td>
-					<td><a href="">创建新职位</a>
+					<td><?php echo anchor_popup('enterprise_job/newJob', '创建新职位');?>
 					</td>
 				</tr>
 			</tfoot>

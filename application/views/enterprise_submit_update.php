@@ -21,13 +21,17 @@
 			<table>
 				<thead>
 					<tr>
+						<th class="span-1"><input type="checkbox" /></th>
 						<th class="span-2">姓名</th>
-						<th class="span-3">人才所在城市</th>
 						<th class="span-3">应聘职位</th>
-						<th class="span-2">年龄</th>
-						<th class="span-2">性别</th>
+						<th class="span-2">项目所在地</th>
+						<th class="span-1">城市</th>
+						<th class="span-1">年龄</th>
+						<th class="span-1">性别</th>
 						<th class="span-2">状态</th>
-						<th class="span-3">操作时间</th>
+						<th class="span-2">评定结果</th>
+						<th class="span-3">推荐职位</th>
+						<th class="span-2">操作内容</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -44,13 +48,21 @@
 					{
 						echo '<tr>'."\n";
 					}
-					echo "	<td><a href=\"\">{$submit_update['hunter_talent_job_Talent_name']}</a></td>\n";
-					echo "	<td>{$submit_update['R_city']}</td>\n";
-					echo "	<td><a href=\"\">{$submit_update['job_Title']}</a></td>\n";
+					echo "	<td><input type=\"checkbox\" />\n";
+					echo "	</td>\n";
+					echo "	<td><a href=\"\">{$submit_update['hunter_talent_job_Talent_name']}</a>\n";
+					echo "	</td>\n";
+					echo "	<td><a href=\"\">{$submit_update['job_Title']}</a>\n";
+					echo "	</td>\n";
+					echo "	<td>{$submit_update['location_display']}</td>\n";
+					echo "	<td>{$submit_update['R_talent_city']}</td>\n";
 					echo "	<td>{$submit_update['R_age']}</td>\n";
 					echo "	<td>{$submit_update['R_sex']}</td>\n";
 					echo "	<td>{$submit_update['hunter_talent_job_submit_status_Des']}</td>\n";
-					echo "	<td>{$submit_update['hunter_talent_job_Status_update_time']}</td>\n";
+					echo "	<td>{$submit_update['R_star']}</td>\n";
+					echo "	<td>{$submit_update['preferJobs']}</td>\n";
+					echo "	<td><a href=\"\">选择</a>    <a href=\"\">拒绝</a>\n";
+					echo "	</td>\n";
 					echo "</tr>";
 				}
 				?>
