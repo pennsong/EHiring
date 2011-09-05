@@ -19,29 +19,25 @@ echo form_open($formUrl, '', array('time_updated'=>set_value('time_updated'), 'j
 	</div>
 	<div style="clear: both"></div>
 	<div class="prepend-1 span-8">
-		<label>工作地点:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <select name="location" value="<?php echo set_value('location');?>" style="width: 200px; color: #999999">
-		<?php echo form_dropdown('location', $citys); ?>
-		</select>
+		<label>工作地点:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<?php $tmpAttr='style="width: 200px; color: #999999"'; echo form_dropdown('location', $citys, set_value('location'), $tmpAttr);?>
 	</div>
 	<div class="prepend-1">
-		<label>职位类别:&nbsp;&nbsp;&nbsp;&nbsp;</label> <select name="jobType" value="<?php echo set_value('jobType');?>" style="width: 200px; color: #999999">
-		<?php echo form_dropdown('jobType', $jobTypes); ?>
-		</select>
+		<label>职位类别:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<?php $tmpAttr='style="width: 200px; color: #999999"'; echo form_dropdown('jobType', $jobTypes, set_value('jobType'), $tmpAttr);?>
 	</div>
 	<div style="clear: both"></div>
 	<div class="prepend-1 span-8">
-		<label>佣金类型:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <select name="commissionType" value="<?php echo set_value('commissionType');?>" style="width: 200px; color: #999999">
-		<?php echo form_dropdown('commissionType', $commissionTypes); ?>
-		</select>
+		<label>佣金类型:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<?php $tmpAttr='style="width: 200px; color: #999999"'; echo form_dropdown('commissionType', $commissionTypes, set_value('commissionType'), $tmpAttr);?>
 	</div>
 	<div class="prepend-1">
 		<label>佣金:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <input name="commission" value="<?php echo set_value('commission');?>" class='text' style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; height: 20px; padding-top: 6px; color: #999999" />
 	</div>
 	<div style="clear: both"></div>
 	<div class="prepend-1 span-8">
-		<label>学历:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> <select name="degree" value="<?php echo set_value('degree');?>" style="width: 200px; color: #999999">
-		<?php echo form_dropdown('degree', $degrees); ?>
-		</select>
+		<label>学历:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+		<?php $tmpAttr='style="width: 200px; color: #999999"'; echo form_dropdown('degree', $degrees, set_value('degree'), $tmpAttr);?>
 	</div>
 	<div class="prepend-1">
 		<label>工作经验:&nbsp;&nbsp;&nbsp;&nbsp;</label> <input name="workExp" value="<?php echo set_value('workExp');?>" class='text' style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; height: 20px; padding-top: 6px; color: #999999" />
@@ -65,7 +61,9 @@ echo form_open($formUrl, '', array('time_updated'=>set_value('time_updated'), 'j
 	<div style="clear: both"></div>
 	<div class="prepend-1">
 		<label style="vertical-align: top">职位详述:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		<textarea name="jobDetailDes" class='text' style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; padding-top: 6px; color: #999999; height: 100px;"><?php echo set_value('jobDetailDes');?></textarea>
+		<textarea name="jobDetailDes" class='text' style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; padding-top: 6px; color: #999999; height: 100px;">
+		<?php echo set_value('jobDetailDes');?>
+		</textarea>
 	</div>
 	<hr class="space" />
 </div>

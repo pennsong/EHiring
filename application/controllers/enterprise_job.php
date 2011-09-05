@@ -1,6 +1,6 @@
 <?php
 if (!defined('BASEPATH'))
-	exit('No direct script access allowed');
+exit('No direct script access allowed');
 class Enterprise_job extends CW_Controller
 {
 	public function editJob($jobId)
@@ -43,24 +43,24 @@ class Enterprise_job extends CW_Controller
 		{
 			//call P_G_createNewJob 创建新职位
 			$tmpParam = array(
-					$this->input->post('jobTitle'),
-					$this->input->post('jobSimpleDes'),
-					$this->input->post('jobDetailDes'),
-					$this->session->userdata('user'),
-					$this->input->post('jobType'),
-					null,
-					$this->input->post('recruitNum'),
-					$this->input->post('workExp'),
-					null,
-					null,
-					$this->input->post('salary'),
-					null,
-					$this->input->post('commissionType'),
-					$this->input->post('commission'),
-					$this->input->post('startDate'),
-					$this->input->post('endDate'),
-					$this->input->post('location'),
-					$this->input->post('degree')
+			$this->input->post('jobTitle'),
+			$this->input->post('jobSimpleDes'),
+			$this->input->post('jobDetailDes'),
+			$this->session->userdata('user'),
+			$this->input->post('jobType'),
+			null,
+			$this->input->post('recruitNum'),
+			$this->input->post('workExp'),
+			null,
+			null,
+			$this->input->post('salary'),
+			null,
+			$this->input->post('commissionType'),
+			$this->input->post('commission'),
+			$this->input->post('startDate'),
+			$this->input->post('endDate'),
+			$this->input->post('location'),
+			$this->input->post('degree')
 			);
 			$this->db->trans_start();
 			$tmpRes = $this->db->multi_query('call P_G_createNewJob(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', $tmpParam);
@@ -105,26 +105,26 @@ class Enterprise_job extends CW_Controller
 			$degreeAddList = $this->input->post('degree');
 			//call P_updateJob 更新职位信息
 			$tmpParam = array(
-					$this->input->post('jobId'),
-					$this->input->post('time_updated'),
-					$this->input->post('jobTitle'),
-					$this->input->post('jobSimpleDes'),
-					$this->input->post('jobDetailDes'),
-					$this->session->userdata('user'),
-					$this->input->post('jobType'),
-					null,
-					$this->input->post('recruitNum'),
-					$this->input->post('workExp'),
-					null,
-					null,
-					$this->input->post('salary'),
-					null,
-					$this->input->post('commissionType'),
-					$this->input->post('commission'),
-					$this->input->post('startDate'),
-					$this->input->post('endDate'),
-					$locationAddList,
-					$degreeAddList,
+			$this->input->post('jobId'),
+			$this->input->post('time_updated'),
+			$this->input->post('jobTitle'),
+			$this->input->post('jobSimpleDes'),
+			$this->input->post('jobDetailDes'),
+			$this->session->userdata('user'),
+			$this->input->post('jobType'),
+			null,
+			$this->input->post('recruitNum'),
+			$this->input->post('workExp'),
+			null,
+			null,
+			$this->input->post('salary'),
+			null,
+			$this->input->post('commissionType'),
+			$this->input->post('commission'),
+			$this->input->post('startDate'),
+			$this->input->post('endDate'),
+			$locationAddList,
+			$degreeAddList,
 			);
 			$tmpRes = $this->db->multi_query('call P_G_updateJob(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', $tmpParam);
 			if (!$tmpRes)
@@ -173,6 +173,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['citys'] = array();
+		$vars['citys'][''] = '请选择';
 		foreach ($tmpArray as $cityInfo)
 		{
 			$vars['citys'][$cityInfo['city_Id']] = $cityInfo['city_Name'];
@@ -182,6 +183,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['jobTypes'] = array();
+		$vars['jobTypes'][''] = '请选择';
 		foreach ($tmpArray as $jobType)
 		{
 			$vars['jobTypes'][$jobType['job_type_Id']] = $jobType['job_type_Des'];
@@ -191,6 +193,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['degrees'] = array();
+		$vars['degrees'][''] = '请选择';
 		foreach ($tmpArray as $degree)
 		{
 			$vars['degrees'][$degree['degree_Id']] = $degree['degree_Des'];
@@ -200,6 +203,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['commissionTypes'] = array();
+		$vars['commissionTypes'][''] = '请选择';
 		foreach ($tmpArray as $commissionType)
 		{
 			$vars['commissionTypes'][$commissionType['commission_type_Id']] = $commissionType['commission_type_Des'];
@@ -212,74 +216,74 @@ class Enterprise_job extends CW_Controller
 	{
 		$this->load->library('form_validation');
 		$config = array(
-				array(
+		array(
 						'field'=>'jobTitle',
 						'label'=>'职位名称',
 						'rules'=>'trim|required'
-				),
-				array(
+						),
+						array(
 						'field'=>'location',
 						'label'=>'工作地点',
-						'rules'=>'required'
-				),
-				array(
+						'rules'=>'trim|required'
+						),
+						array(
 						'field'=>'jobType',
 						'label'=>'职位类别',
 						'rules'=>'required'
-				),
-				array(
+						),
+						array(
 						'field'=>'degree',
 						'label'=>'学历',
 						'rules'=>'required'
-				),
-				array(
+						),
+						array(
 						'field'=>'workExp',
 						'label'=>'工作经验',
 						'rules'=>'is_natural_no_zero'
-				),
-				array(
+						),
+						array(
 						'field'=>'recruitNum',
 						'label'=>'人数',
 						'rules'=>'is_natural_no_zero'
-				),
-				array(
+						),
+						array(
 						'field'=>'salary',
 						'label'=>'福利待遇',
 						'rules'=>'greater_than[0]'
-				),
-				array(
+						),
+						array(
 						'field'=>'commissionType',
 						'label'=>'佣金类型',
 						'rules'=>'required'
-				),
-				array(
+						),
+						array(
 						'field'=>'commission',
 						'label'=>'佣金',
 						'rules'=>'required|greater_than[0]'
-				),
-				array(
+						),
+						array(
 						'field'=>'jobSimpleDes',
 						'label'=>'职位简述',
 						'rules'=>'max_length[40]'
-				),
-				array(
+						),
+						array(
 						'field'=>'startDate',
 						'label'=>'有效期开始',
 						'rules'=>'callback_isDate'
-				),
-				array(
+						),
+						array(
 						'field'=>'endDate',
 						'label'=>'有效期结束',
 						'rules'=>'callback_isDate'
-				),
-				array(
+						),
+						array(
 						'field'=>'jobDetailDes',
 						'label'=>'职位详述',
 						'rules'=>'max_length[1000]'
-				)
-		);
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_message('isDate', '%s不正确');
+						)
+						);
+						$this->form_validation->set_rules($config);
+						$this->form_validation->set_message('isDate', '%s不正确');
 	}
 
 	private function getJobInfo($jobId)
