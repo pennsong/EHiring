@@ -230,14 +230,22 @@ class CI_DB_mysqli_result extends CI_DB_result {
 		{
 			$this->result_id->free();
 		}
-	 	while ($this->conn_id->next_result())
-	 	{
-	 		$this->result_id = $this->conn_id->use_result();
-	 		if ($this->result_id instanceof mysqli_result)
+		while ($this->conn_id->next_result())
+		{
+			$this->result_id = $this->conn_id->use_result();
+			if ($this->result_id instanceof mysqli_result)
 			{
 				$this->result_id->free();
 			}
-	 	}
+		}
+		if ($this->conn_id->error)
+		{
+			return FALSE;
+		}
+		else
+		{
+			return TRUE;
+		}
 	}
 }
 

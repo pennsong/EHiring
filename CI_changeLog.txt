@@ -1,0 +1,16 @@
+system/database/drivers/mysqli/mysqli_result.php
+add function:
+next_result()
+free_all()
+store_result()
+--------
+system/database/DB_driver.php
+changed in function query($sql, $binds = FALSE, $return_object = TRUE):
+
+[* @return	mixed] to [* @return	CI_DB_mysqli_result]
+
+
+add function:
+multi_query($sql, $binds = FALSE, $return_object = TRUE)
+--------
+add application/helpers/CW_form_helper.php
