@@ -10,7 +10,7 @@ class Hunter_talent_resume extends CW_Controller
 
 	public function saveNewResume()
 	{
-		$this->setValicate();
+		$this->setValidate();
 		if ($this->form_validation->run() == TRUE)
 		{
 			//process live location
@@ -66,6 +66,7 @@ class Hunter_talent_resume extends CW_Controller
 			else
 			{
 				$tmpResult = explode('@', $tmpRes->row()->Result);
+				$tmpRes->free_all();
 				if ($tmpResult[0] == 'SUCCESS')
 				{
 					$this->db->trans_commit();
@@ -149,7 +150,7 @@ class Hunter_talent_resume extends CW_Controller
 		$this->load->view('template', $vars);
 	}
 
-	private function setValicate()
+	private function setValidate()
 	{
 		$this->load->library('form_validation');
 		$config = array(

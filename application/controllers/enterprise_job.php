@@ -38,7 +38,7 @@ class Enterprise_job extends CW_Controller
 
 	public function saveNewJob()
 	{
-		$this->setValicate();
+		$this->setValidate();
 		if ($this->form_validation->run() == TRUE)
 		{
 			//call P_G_createNewJob 创建新职位
@@ -97,7 +97,7 @@ class Enterprise_job extends CW_Controller
 
 	public function saveEditJob()
 	{
-		$this->setValicate();
+		$this->setValidate();
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->db->trans_start();
@@ -212,7 +212,7 @@ class Enterprise_job extends CW_Controller
 		$this->load->view('template', $vars);
 	}
 
-	private function setValicate()
+	private function setValidate()
 	{
 		$this->load->library('form_validation');
 		$config = array(
