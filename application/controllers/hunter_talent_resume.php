@@ -8,6 +8,192 @@ class Hunter_talent_resume extends CW_Controller
 		$this->display('hunter_talent_info_input', '新建人才简历-基本信息');
 	}
 
+	public function reEditResume($talentId)
+	{
+		
+	}
+	
+	public function editResume($talentId)
+	{
+		if ($talentId == null)
+		{
+			echo "记录不存在";
+			return;
+		}
+		$displayData = $this->getResumeInfo($talentId);
+		if ($displayData == null)
+		{
+			echo "记录不存在";
+			return;
+		}
+		else
+		{
+			//process location data
+			if ($displayData['hunter_talent_Talent_location_type_id'] == 1)
+			{
+				$_POST['province'] = $displayData['hunter_talent_Talent_live_id'];
+				$_POST['city'] = '';
+			}
+			else if ($displayData['hunter_talent_Talent_location_type_id'] == 2)
+			{
+				$tmpRes = $this->db->query('SELECT city_Province_id FROM T_City WHERE city_Id = ?', $displayData['hunter_talent_Talent_live_id']);
+				if (!$tmpRes)
+				{
+					show_error('数据查询失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
+				}
+				else
+				{
+					if ($tmpRes->num_rows() == 0)
+					{
+						$_POST['province'] = '';
+						$_POST['city'] = '';
+					}
+					else
+					{
+						$_POST['province'] = $tmpRes->row()->city_Province_id;
+						$_POST['city'] = $displayData['hunter_talent_Talent_live_id'];
+					}
+				}
+			}
+			else if ($displayData['hunter_talent_Talent_location_type_id'] == 3)
+			{
+					
+					
+				$tmpRes = $this->db->query('SELECT r_province_id, r_city_id FROM v_location_info WHERE location_type_id = 3 AND location_id = ?', $displayData['hunter_talent_Talent_live_id']);
+				if (!$tmpRes)
+				{
+					show_error('数据查询失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
+				}
+				else
+				{
+					if ($tmpRes->num_rows() == 0)
+					{
+						$_POST['province'] = '';
+						$_POST['city'] = '';
+					}
+					else
+					{
+						$_POST['province'] = $tmpRes->row()->r_province_id;
+						$_POST['city'] = $tmpRes->row()->r_city_id;;
+					}
+				}
+			}
+			$_POST['talentName'] = $displayData['hunter_talent_Talent_name'];
+			$_POST['talentSex'] = $displayData['hunter_talent_Talent_sex_id'];
+			$_POST['talentMobile'] = $displayData['hunter_talent_Talent_mobile'];
+			$_POST['talnetQQ'] = $displayData['hunter_talent_Talent_qq'];
+			$_POST['talentIdCard'] = $displayData['hunter_talent_Talent_id_card'];
+			$_POST['talentBornPlace'] = $displayData['hunter_talent_Talent_born_place'];
+			$_POST['talentAddress'] = $displayData['hunter_talent_Talent_live_street'];
+			$_POST['talentHeight'] = $displayData['hunter_talent_Talent_height'];
+			$_POST['talentWeight'] = $displayData['hunter_talent_Talent_weight'];
+			$this->display('hunter_talent_info_input', '编辑人才简历-基本信息');
+		}
+	}
+
+	public function getResumeInfo($talentId)
+	{
+		$tmpRes = $this->db->query('SELECT * FROM T_Hunter_Talent');
+		if (!$tmpRes)
+		{
+			show_error('数据查询失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
+		}
+		else
+		{
+			if ($tmpRes->num_rows() == 0)
+			{
+				//todo 处理没有查到所要编辑记录状况
+				return NULL;
+			}
+			else
+			{
+				$displayData = $tmpRes->row_array();
+				return $displayData;
+			}
+		}
+	}
+
+	public function saveEditResume($talentId)
+	{
+		$this->setValidate();
+		if ($this->form_validation->run() == TRUE)
+		{
+			//process live location
+			if ($this->input->post('city') != null)
+			{
+				$locationTypeId = 3;
+				$liveLocationId = $this->input->post('city');
+			}
+			else if ($this->input->post('province') != null)
+			{
+				$locationTypeId = 2;
+				$liveLocationId = $this->input->post('province');
+			}
+			else
+			{
+				$locationTypeId = null;
+				$liveLocationId = null;
+			}
+			$this->db->trans_start();
+			$tmpParam=array(
+			$this->session->userdata('user'),
+			$this->input->post('talentIdCard'),
+			$this->input->post('talentName'),
+			$this->input->post('talentHeight'),
+			$this->input->post('talentWeight'),
+			null,
+			$this->input->post('talentSex'),
+			$this->input->post('talentMobile'),
+			null,
+			$this->input->post('talentQQ'),
+			null,
+			$this->input->post('talentBornPlace'),
+			$locationTypeId,
+			$liveLocationId,
+			$this->input->post('talentLivePlace'),
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null
+			);
+			$tmpRes = $this->db->query('SELECT F_G_updateHunterTalent(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) Result', $tmpParam);
+			if (!$tmpRes)
+			{
+				$this->db->trans_complete();
+				show_error('数据插入失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
+			}
+			else
+			{
+				$tmpResult = explode('@', $tmpRes->row()->Result);
+				if ($tmpResult[0] == 'SUCCESS')
+				{
+					$this->db->trans_commit();
+					echo $tmpResult[0].":".$tmpResult[1].":".$tmpResult[2];
+					redirect(site_url('hunter_talent_workExp/newWorkeXP').'/'.$tmpResult[2]);
+				}
+				else
+				{
+					$this->db->trans_rollback();
+					echo $tmpResult[0].":".$tmpResult[1];
+					$this->reEditResume($talentId);
+				}
+			}
+			$this->db->trans_off();
+		}
+		else
+		{
+			$this->reEditJob($talentId);
+		}
+	}
+
 	public function saveNewResume()
 	{
 		$this->setValidate();
@@ -34,6 +220,8 @@ class Hunter_talent_resume extends CW_Controller
 			$this->session->userdata('user'),
 			$this->input->post('talentIdCard'),
 			$this->input->post('talentName'),
+			$this->input->post('talentHeight'),
+			$this->input->post('talentWeight'),
 			null,
 			$this->input->post('talentSex'),
 			$this->input->post('talentMobile'),
@@ -57,7 +245,7 @@ class Hunter_talent_resume extends CW_Controller
 			null,
 			null
 			);
-			$tmpRes = $this->db->multi_query('SELECT F_G_createNewHunterTalent(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) Result', $tmpParam);
+			$tmpRes = $this->db->query('SELECT F_G_createNewHunterTalent(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) Result', $tmpParam);
 			if (!$tmpRes)
 			{
 				$this->db->trans_rollback();
@@ -66,12 +254,11 @@ class Hunter_talent_resume extends CW_Controller
 			else
 			{
 				$tmpResult = explode('@', $tmpRes->row()->Result);
-				$tmpRes->free_all();
 				if ($tmpResult[0] == 'SUCCESS')
 				{
 					$this->db->trans_commit();
-					echo $tmpResult[0].":".$tmpResult[1];
-					$this->newResume();
+					echo $tmpResult[0].":".$tmpResult[1].":".$tmpResult[2];
+					redirect(site_url('hunter_talent_workExp/newWorkeXP').'/'.$tmpResult[2]);
 				}
 				else
 				{

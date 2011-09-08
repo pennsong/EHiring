@@ -298,7 +298,7 @@ class Enterprise_job extends CW_Controller
 		{
 			if ($tmpRes->num_rows() == 0)
 			{
-				$this->generalInfo = '未找到相应记录';
+				//todo 处理没有查到所要编辑记录状况
 			}
 			else
 			{

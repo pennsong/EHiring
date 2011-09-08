@@ -1,11 +1,12 @@
 <script type="text/javascript" src="<?php echo base_url()."js/jquery.js" ?>"></script>
 <script type="text/javascript">
+
 	$(document).ready(function()
 	{
-		$("#livePlace").load("getLivePlaceDiv/<?php echo set_value('province')."/".set_value('city')?>");
+		$("#livePlace").load("<?php echo site_url('hunter_talent_resume/getLivePlaceDiv').'/'.set_value('province')."/".set_value('city')?>");
 		$("#livePlace").change(function()
 		{
-			var url = "getLivePlaceDiv/" + $('#province').val() + "/" + $('#city').val()
+			var url = "<?php echo site_url('hunter_talent_resume/getLivePlaceDiv').'/' ?>" + $('#province').val() + "/" + $('#city').val();
 			$("#livePlace").load(url);
 		});
 	});
