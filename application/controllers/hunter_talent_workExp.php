@@ -105,7 +105,7 @@ class Hunter_talent_workExp extends CW_Controller
 		$talentId,
 		$company,
 		$position,
-		$startDate
+		$this->convertToDate($startDate)
 		);
 		$tmpRes = $this->db->query('SELECT F_delHunterTalentWorkExp(?,?,?,?,?) Result', $tmpParam);
 		if (!$tmpRes)

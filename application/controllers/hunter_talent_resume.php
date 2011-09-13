@@ -176,13 +176,13 @@ class Hunter_talent_resume extends CW_Controller
 				{
 					$this->db->trans_commit();
 					echo "保存成功！";
-					redirect(site_url('hunter_talent_workExp/newWorkeXP').'/'.$talentId);
+					redirect(site_url('hunter_talent_workExp/displayWorkeXP').'/'.$talentId);
 				}
 				else
 				{
 					$this->db->trans_commit();
 					echo "数据没有改动！";
-					redirect(site_url('hunter_talent_workExp/newWorkeXP').'/'.$talentId);
+					redirect(site_url('hunter_talent_workExp/displayWorkeXP').'/'.$talentId);
 				}
 			}
 			$this->db->trans_off();
@@ -258,7 +258,7 @@ class Hunter_talent_resume extends CW_Controller
 				{
 					$this->db->trans_commit();
 					echo $tmpResult[0].":".$tmpResult[1];
-					redirect(site_url('hunter_talent_workExp/newWorkeXP').'/'.$this->input->post('talentId'));
+					redirect(site_url('hunter_talent_workExp/displayWorkeXP').'/'.$this->input->post('talentId'));
 				}
 				else
 				{

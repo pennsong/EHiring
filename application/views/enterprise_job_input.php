@@ -61,9 +61,7 @@ echo form_open($formUrl, '', array('time_updated'=>set_value('time_updated'), 'j
 	<div style="clear: both"></div>
 	<div class="prepend-1">
 		<label style="vertical-align: top">职位详述:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		<textarea name="jobDetailDes" class='text' style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; padding-top: 6px; color: #999999; height: 100px;">
-		<?php echo set_value('jobDetailDes');?>
-		</textarea>
+		<textarea name="jobDetailDes" class='text' style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; padding-top: 6px; color: #999999; height: 100px;"><?php echo set_value('jobDetailDes');?></textarea>
 	</div>
 	<hr class="space" />
 </div>

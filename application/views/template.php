@@ -26,6 +26,7 @@ Released   : 20100529
 				margin-bottom: 10px;
 			}
 		</style>
+		<script src='<?php echo base_url()?>/js/jquery.js'></script>
 	</head>
 	<body>
 		<div class="container">

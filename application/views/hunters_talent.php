@@ -2,7 +2,11 @@
 	<div class="span-24 maintext blue">
 		<hr class="space" />
 		<h3 class="prepend-1 blue bord" style="margin-top: 20px">
-			人才库 <span style="font-size: 14px; font-weight: normal"><a class="prepend-1" href="">新建求职人员</a> </span>&nbsp;&nbsp; <span style="font-size: 14px; font-weight: normal"><a class="prepend-1" href="">求职人员批量导入</a> </span>&nbsp;&nbsp; <span style="font-size: 14px; font-weight: normal"><a class="prepend-1" href="">去系统公共资源筛选人才</a> </span>
+			人才库 <span style="font-size: 14px; font-weight: normal">
+			<?php 
+				echo anchor_popup('hunter_talent_resume/newresume', '新建求职人员', array('class' => 'prepend-1'));
+			?>
+			</span>&nbsp;&nbsp; <span style="font-size: 14px; font-weight: normal"><a class="prepend-1" href="">求职人员批量导入</a> </span>&nbsp;&nbsp; <span style="font-size: 14px; font-weight: normal"><a class="prepend-1" href="">去系统公共资源筛选人才</a> </span>
 		</h3>
 		<hr class="space" />
 		<div class="span-15 prepend-1">
