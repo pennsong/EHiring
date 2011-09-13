@@ -1,9 +1,9 @@
 <?php
 if (!defined('BASEPATH'))
-exit('No direct script access allowed');
+	exit('No direct script access allowed');
 class Hunter_submit_update extends CW_Controller
 {
-	public function index($offset=0)
+	public function index($offset = 0)
 	{
 		$pageSize = 5;
 		$vars['nowPage'] = 'submitUpdate';
@@ -18,7 +18,11 @@ class Hunter_submit_update extends CW_Controller
 		$config['first_link'] = '<<';
 		$config['last_link'] = '>>';
 		$config['anchor_class'] = 'class="blue" ';
-		$tmpRes = $this->db->multi_query("call P_talentJobStatusUpdateForHunter(?, null, null, ?, ?)", array($hunterAccount, $offset, $pageSize));
+		$tmpRes = $this->db->multi_query("call P_talentJobStatusUpdateForHunter(?, null, null, ?, ?)", array(
+				$hunterAccount,
+				$offset,
+				$pageSize
+		));
 		if (!$tmpRes)
 		{
 			show_error('数据查询失败，请重试!');
@@ -31,7 +35,6 @@ class Hunter_submit_update extends CW_Controller
 		$config['total_rows'] = $tmpArray[0]['R_total_rows'];
 		$tmpRes->free_result();
 		$tmpRes->free_all();
-
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
 		$this->load->view('template', $vars);

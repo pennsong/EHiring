@@ -1,9 +1,9 @@
 <?php
 if (!defined('BASEPATH'))
-exit('No direct script access allowed');
+	exit('No direct script access allowed');
 class Enterprise_jobs extends CW_Controller
 {
-	public function index($offset=0)
+	public function index($offset = 0)
 	{
 		$pageSize = 10;
 		$vars['nowPage'] = 'enterpriseJobs';
@@ -17,7 +17,11 @@ class Enterprise_jobs extends CW_Controller
 		$config['last_link'] = '>>';
 		$config['anchor_class'] = 'class="blue" ';
 		//P_activeJobListForEnterprise 查询该企业用户的职位
-		$tmpRes = $this->db->multi_query("call P_activeJobListForEnterprise(?,null,?,?)", array($enterpriseAccount, $offset, $pageSize));
+		$tmpRes = $this->db->multi_query("call P_activeJobListForEnterprise(?,null,?,?)", array(
+				$enterpriseAccount,
+				$offset,
+				$pageSize
+		));
 		if (!$tmpRes)
 		{
 			show_error('数据查询失败，请重试!');
@@ -30,7 +34,6 @@ class Enterprise_jobs extends CW_Controller
 		$config['total_rows'] = $tmpArray[0]['R_total_rows'];
 		$tmpRes->free_result();
 		$tmpRes->free_all();
-
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
 		//P_jobLocations 查询指定职位的location

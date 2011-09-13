@@ -1,16 +1,15 @@
 <?php
 if (!defined('BASEPATH'))
-exit('No direct script access allowed');
+	exit('No direct script access allowed');
 class Hunters_talent extends CW_Controller
 {
-	public function index($offset=0)
+	public function index($offset = 0)
 	{
 		$pageSize = 5;
 		$vars['nowPage'] = 'huntersTalent';
 		$vars['content_view'] = 'hunters_talent';
 		$vars['navigation_menu'] = 'navigation_menu';
 		$hunterAccount = $this->session->userdata('user');
-
 		$config['base_url'] = site_url('hunters_talent/index');
 		$config['per_page'] = $pageSize;
 		$config['uri_segment'] = '3';
@@ -18,7 +17,11 @@ class Hunters_talent extends CW_Controller
 		$config['last_link'] = '>>';
 		$config['anchor_class'] = 'class="blue" ';
 		//P_huntersTalentSortByUpdateTime 查询此猎头的人才信息
-		$tmpRes = $this->db->multi_query("call P_huntersTalentSortByUpdateTime(?,null,null,?,?)", array($hunterAccount, $offset, $pageSize));
+		$tmpRes = $this->db->multi_query("call P_huntersTalentSortByUpdateTime(?,null,null,?,?)", array(
+				$hunterAccount,
+				$offset,
+				$pageSize
+		));
 		if (!$tmpRes)
 		{
 			show_error('数据查询失败，请重试!');
@@ -36,7 +39,10 @@ class Hunters_talent extends CW_Controller
 		foreach ($vars['talentList'] as &$talentInfo)
 		{
 			//P_huntersTalentPreferJob 查询猎头人才的适合职位
-			$tmpRes = $this->db->query("call P_huntersTalentPreferJob(?, ?, 0, 2)", array($hunterAccount, $talentInfo['hunter_talent_Talent_Id']));
+			$tmpRes = $this->db->query("call P_huntersTalentPreferJob(?, ?, 0, 2)", array(
+					$hunterAccount,
+					$talentInfo['hunter_talent_Talent_Id']
+			));
 			if (!$tmpRes)
 			{
 				show_error('数据查询失败，请重试!');

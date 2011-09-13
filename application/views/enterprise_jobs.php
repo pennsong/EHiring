@@ -19,43 +19,44 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php
-			$tmpCount = 0;
-			foreach ($jobs as $job)
-			{
-				$tmpCount++;
-				if ($tmpCount % 2 == 0)
+				<?php
+				$tmpCount = 0;
+				foreach ($jobs as $job)
 				{
-					echo '<tr class="even">'."\n";
+					$tmpCount++;
+					if ($tmpCount % 2 == 0)
+					{
+						echo '<tr class="even">'."\n";
+					}
+					else
+					{
+						echo '<tr>'."\n";
+					}
+					echo "	<td><a href=\"\">{$job['job_Id']}</a>\n";
+					echo "	</td>\n";
+					echo "	<td><a href=\"\">{$job['job_Title']}</a>\n";
+					echo "	</td>\n";
+					echo "	<td>{$job['job_Simple_des']}</td>\n";
+					echo "	<td>{$job['location_display']}</td>\n";
+					echo "	<td>{$job['R_salary']}</td>\n";
+					echo "	<td>{$job['job_Start_date']}</td>\n";
+					echo "	<td>{$job['job_End_date']}</td>\n";
+					echo "	<td>{$job['totalPersonNum']}</td>\n";
+					echo "	<td>{$job['R_submitted']}</td>\n";
+					echo "	<td>{$job['R_passed']}</td>\n";
+					echo "	<td>{$job['R_rejected']}</td>\n";
+					echo "	<td><a href=\"\">挑人才</a>\n";
+					echo "	</td>\n";
+					echo "</tr>";
 				}
-				else
-				{
-					echo '<tr>'."\n";
-				}
-				echo "	<td><a href=\"\">{$job['job_Id']}</a>\n";
-				echo "	</td>\n";
-				echo "	<td><a href=\"\">{$job['job_Title']}</a>\n";
-				echo "	</td>\n";
-				echo "	<td>{$job['job_Simple_des']}</td>\n";
-				echo "	<td>{$job['location_display']}</td>\n";
-				echo "	<td>{$job['R_salary']}</td>\n";
-				echo "	<td>{$job['job_Start_date']}</td>\n";
-				echo "	<td>{$job['job_End_date']}</td>\n";
-				echo "	<td>{$job['totalPersonNum']}</td>\n";
-				echo "	<td>{$job['R_submitted']}</td>\n";
-				echo "	<td>{$job['R_passed']}</td>\n";
-				echo "	<td>{$job['R_rejected']}</td>\n";
-				echo "	<td><a href=\"\">挑人才</a>\n";
-				echo "	</td>\n";
-				echo "</tr>";
-			}
-			?>
+				?>
 			</tbody>
 		</table>
 	</div>
 	<hr class="space" />
 	<div class="span-18 prepend-7">
-	<?php echo $this->pagination->create_links();?>
+		<?php echo $this->pagination->create_links();?>
 	</div>
 	<hr class="space" />
 	<hr />
+</div>

@@ -1,6 +1,6 @@
 <?php
 if (!defined('BASEPATH'))
-exit('No direct script access allowed');
+	exit('No direct script access allowed');
 class Hunter_talent_workExp extends CW_Controller
 {
 	public function checkLegal($talentId)
@@ -11,8 +11,8 @@ class Hunter_talent_workExp extends CW_Controller
 			$sql .= 'hunter_talent_Hunter_account = ?';
 			$sql .= 'AND hunter_talent_Talent_id = ?';
 			$tmpParam = array(
-			$this->session->userdata('user'),
-			$talentId
+					$this->session->userdata('user'),
+					$talentId
 			);
 			$tmpRes = $this->db->query($sql, $tmpParam);
 			if (!$tmpRes)
@@ -36,9 +36,7 @@ class Hunter_talent_workExp extends CW_Controller
 	public function displayWorkExp($talentId = null)
 	{
 		$this->checkLegal($talentId);
-		$tmpParam = array(
-						'talentId' => $talentId
-		);
+		$tmpParam = array('talentId'=>$talentId);
 		$this->display('hunter_talent_workExp_input', '人才简历-工作经历', 'display', $tmpParam);
 	}
 
@@ -55,15 +53,15 @@ class Hunter_talent_workExp extends CW_Controller
 		{
 			$this->db->trans_start();
 			$tmpParam = array(
-			$talentId,
-			$this->session->userdata('user'),
-			$this->input->post('company'),
-			$this->convertToDate($this->input->post('startDate')),
-			$this->convertToDate($this->input->post('endDate')),
-			$this->input->post('position'),
-			$this->input->post('salary'),
-			$this->input->post('reasonType'),
-			$this->input->post('reasonDetail')
+					$talentId,
+					$this->session->userdata('user'),
+					$this->input->post('company'),
+					$this->convertToDate($this->input->post('startDate')),
+					$this->convertToDate($this->input->post('endDate')),
+					$this->input->post('position'),
+					$this->input->post('salary'),
+					$this->input->post('reasonType'),
+					$this->input->post('reasonDetail')
 			);
 			$tmpRes = $this->db->query('SELECT F_G_createNewHunterTalentWorkExp(?,?,?,?,?,?,?,?,?) Result', $tmpParam);
 			if (!$tmpRes)
@@ -101,11 +99,11 @@ class Hunter_talent_workExp extends CW_Controller
 		$this->checkLegal($talentId);
 		$this->db->trans_start();
 		$tmpParam = array(
-		$this->session->userdata('user'),
-		$talentId,
-		$company,
-		$position,
-		$this->convertToDate($startDate)
+				$this->session->userdata('user'),
+				$talentId,
+				$company,
+				$position,
+				$this->convertToDate($startDate)
 		);
 		$tmpRes = $this->db->query('SELECT F_delHunterTalentWorkExp(?,?,?,?,?) Result', $tmpParam);
 		if (!$tmpRes)
@@ -162,11 +160,11 @@ class Hunter_talent_workExp extends CW_Controller
 	private function getWorkExpInfo($talentId, $company, $position, $startDate)
 	{
 		$tmpParam = array(
-		$this->session->userdata('user'),
-		$talentId,
-		$company,
-		$position,
-		$this->convertToDate($startDate)
+				$this->session->userdata('user'),
+				$talentId,
+				$company,
+				$position,
+				$this->convertToDate($startDate)
 		);
 		$tmpRes = $this->db->query('CALL P_getHunterTalentWorkExp(?,?,?,?,?)', $tmpParam);
 		if (!$tmpRes)
@@ -200,15 +198,15 @@ class Hunter_talent_workExp extends CW_Controller
 			//update record
 			$this->db->trans_start();
 			$tmpParam = array(
-			$talentId,
-			$this->session->userdata('user'),
-			$company,
-			$this->convertToDate($startDate),
-			$this->convertToDate($this->input->post('endDate')),
-			$position,
-			$this->input->post('salary'),
-			$this->input->post('reasonType'),
-			$this->input->post('reasonDetail')
+					$talentId,
+					$this->session->userdata('user'),
+					$company,
+					$this->convertToDate($startDate),
+					$this->convertToDate($this->input->post('endDate')),
+					$position,
+					$this->input->post('salary'),
+					$this->input->post('reasonType'),
+					$this->input->post('reasonDetail')
 			);
 			$tmpRes = $this->db->query('SELECT F_updateHunterTalentWorkExp(?,?,?,?,?,?,?,?,?) Result', $tmpParam);
 			if (!$tmpRes)
@@ -252,8 +250,8 @@ class Hunter_talent_workExp extends CW_Controller
 		{
 			//新建状态
 			$tmpParam = array(
-			$displayData['talentId'],
-			$this->session->userdata('user')
+					$displayData['talentId'],
+					$this->session->userdata('user')
 			);
 			$sql = 'SELECT *';
 			$sql .= ' FROM T_Hunter_Talent_Work_experience ';
@@ -266,11 +264,11 @@ class Hunter_talent_workExp extends CW_Controller
 		{
 			//编辑状态
 			$tmpParam = array(
-			$displayData['talentId'],
-			$this->session->userdata('user'),
-			$displayData['company'],
-			$displayData['position'],
-			$this->convertToDate($displayData['startDate'])
+					$displayData['talentId'],
+					$this->session->userdata('user'),
+					$displayData['company'],
+					$displayData['position'],
+					$this->convertToDate($displayData['startDate'])
 			);
 			$sql = 'SELECT *';
 			$sql .= ' FROM T_Hunter_Talent_Work_experience ';
@@ -311,53 +309,52 @@ class Hunter_talent_workExp extends CW_Controller
 		}
 		$this->load->helper('form');
 		$this->load->view('template', $vars);
-
 	}
 
 	private function setValidate($type)
 	{
 		$this->load->library('form_validation');
 		$config = array(
-		array(
+				array(
 						'field'=>'endDate',
 						'label'=>'结束日期',
 						'rules'=>'callback_checkDate'
-						),
-						array(
+				),
+				array(
 						'field'=>'salary',
 						'label'=>'最后工资',
 						'rules'=>'required|is_natural|max_length[6]'
-						),
-						array(
+				),
+				array(
 						'field'=>'reasonType',
 						'label'=>'离职原因',
 						'rules'=>'required|is_natural|callback_reasonCheck'
-						),
-						array(
+				),
+				array(
 						'field'=>'reasonDetails',
 						'label'=>'离职详情',
 						'rules'=>'max_length[200]'
-						)
-						);
-						if ($type == 'new')
-						{
-							array_push($config, array(
+				)
+		);
+		if ($type == 'new')
+		{
+			array_push($config, array(
 					'field'=>'company',
 					'label'=>'公司名称',
 					'rules'=>'trim|required'
-					), array(
+			), array(
 					'field'=>'startDate',
 					'label'=>'开始日期',
 					'rules'=>'required|callback_checkDate'
-					), array(
+			), array(
 					'field'=>'position',
 					'label'=>'职位',
 					'rules'=>'required'
-					));
-						}
-						$this->form_validation->set_rules($config);
-						$this->form_validation->set_message('checkDate', '日期格式不正确');
-						$this->form_validation->set_message('reasonCheck', '离职原因为其他时需要填写具体离职原因');
+			));
+		}
+		$this->form_validation->set_rules($config);
+		$this->form_validation->set_message('checkDate', '日期格式不正确');
+		$this->form_validation->set_message('reasonCheck', '离职原因为其他时需要填写具体离职原因');
 	}
 
 	public function checkDate($str)

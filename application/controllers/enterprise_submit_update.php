@@ -1,9 +1,9 @@
 <?php
 if (!defined('BASEPATH'))
-exit('No direct script access allowed');
+	exit('No direct script access allowed');
 class enterprise_submit_update extends CW_Controller
 {
-	public function index($offset=0)
+	public function index($offset = 0)
 	{
 		$pageSize = 10;
 		$vars['nowPage'] = 'enterpriseSubmitUpdate';
@@ -18,7 +18,11 @@ class enterprise_submit_update extends CW_Controller
 		$config['first_link'] = '<<';
 		$config['last_link'] = '>>';
 		$config['anchor_class'] = 'class="blue" ';
-		$tmpRes = $this->db->multi_query("call P_talentJobStatusUpdateForEnterprise(?, null, null, ?, ?)", array($enterpriseUserAccount, $offset, $pageSize));
+		$tmpRes = $this->db->multi_query("call P_talentJobStatusUpdateForEnterprise(?, null, null, ?, ?)", array(
+				$enterpriseUserAccount,
+				$offset,
+				$pageSize
+		));
 		if (!$tmpRes)
 		{
 			show_error('数据查询失败，请重试!');
@@ -31,7 +35,6 @@ class enterprise_submit_update extends CW_Controller
 		$config['total_rows'] = $tmpArray[0]['R_total_rows'];
 		$tmpRes->free_result();
 		$tmpRes->free_all();
-
 		//P_jobLocations 查询职位所在城市
 		foreach ($vars['submit_update_list'] as &$update_list)
 		{
@@ -58,7 +61,10 @@ class enterprise_submit_update extends CW_Controller
 		//P_huntersTalentPreferJob 查询人才的适合职位
 		foreach ($vars['submit_update_list'] as &$update_list)
 		{
-			$tmpRes = $this->db->query("call P_huntersTalentPreferJob(?, ?, 0, 2)", array($enterpriseUserAccount, $update_list['hunter_talent_job_Talent_Id']));
+			$tmpRes = $this->db->query("call P_huntersTalentPreferJob(?, ?, 0, 2)", array(
+					$enterpriseUserAccount,
+					$update_list['hunter_talent_job_Talent_Id']
+			));
 			if (!$tmpRes)
 			{
 				show_error('数据查询失败，请重试!');

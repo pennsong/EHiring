@@ -43,12 +43,13 @@
 		</div>
 	</div>
 	<hr class="space" />
-	<img src="<?php echo base_url()?>images/img02.jpg" class="push-1" />
+	<img src="<?php echo base_url();?>images/img02.jpg" class="push-1" />
 	<h1 class="span-4 prepend-2"><a href="#">E-hiring</a></h1>
 	<p class="span-4" style="margin-top: 15px; color: #FFFFFF">
 		&nbsp;&nbsp;&nbsp;&nbsp;综合招聘信息平台
 	</p>
-	<div style="clear: both"></div>
+	<div style="clear: both">
+	</div>
 	<?php
 	if (isset($navigation_menu) && $navigation_menu == 'navigation_menu' && $this->session->userdata('type') == 'hunter')
 	{

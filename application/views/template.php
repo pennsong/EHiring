@@ -14,10 +14,12 @@ Released   : 20100529
 		<meta name="description" content="" />
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title><?php echo $page_title;?></title>
-		<link rel="stylesheet" href="<?php echo base_url()?>blueprint/screen.css" type="text/css" media="screen, projection">
-		<link rel="stylesheet" href="<?php echo base_url()?>blueprint/print.css" type="text/css" media="print">
-		<!--[if lt IE 8]><link rel="stylesheet" href="../blueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
-		<link href="<?php echo base_url()?>style.css" rel="stylesheet" type="text/css" media="screen" />
+		<?php
+		echo '<link rel="stylesheet" href="'.base_url().'blueprint/screen.css" type="text/css" media="screen, projection">';
+		echo '<link rel="stylesheet" href="'.base_url().'blueprint/print.css" type="text/css" media="print">';
+		echo '<link href="'.base_url().'style.css" rel="stylesheet" type="text/css" media="screen" />';
+		echo "<script src='".base_url()."/js/jquery.js'></script>";
+		?>
 		<style type="text/css" media="screen">
 			p, table, hr, .box {
 				margin-bottom: 25px;
@@ -26,7 +28,6 @@ Released   : 20100529
 				margin-bottom: 10px;
 			}
 		</style>
-		<script src='<?php echo base_url()?>/js/jquery.js'></script>
 	</head>
 	<body>
 		<div class="container">

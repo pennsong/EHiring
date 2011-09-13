@@ -1,6 +1,6 @@
 <?php
 if (!defined('BASEPATH'))
-exit('No direct script access allowed');
+	exit('No direct script access allowed');
 class Enterprise_home extends CW_Controller
 {
 	public function index()
@@ -9,7 +9,6 @@ class Enterprise_home extends CW_Controller
 		$vars['content_view'] = 'enterprise_home';
 		$vars['navigation_menu'] = 'navigation_menu';
 		$enterpriseUserAccount = $this->session->userdata('user');
-
 		//P_talentJobStatusUpdateForEnterprise 查询与此企业相关的人员推荐更新状态
 		$tmpRes = $this->db->query("call P_talentJobStatusUpdateForEnterprise(?,null,null,0,5)", $enterpriseUserAccount);
 		if (!$tmpRes)
@@ -21,7 +20,11 @@ class Enterprise_home extends CW_Controller
 		foreach ($vars['submit_update_list'] as &$talentInfo)
 		{
 			//P_huntersTalentJobPreferJob 查询指定人员的适合岗位
-			$tmpRes = $this->db->query("call P_huntersTalentJobPreferJob(?, ?, ?, 0, 2)", array($talentInfo['hunter_talent_job_Hunter_account'], $talentInfo['hunter_talent_job_Talent_Id'], $talentInfo['job_Id']));
+			$tmpRes = $this->db->query("call P_huntersTalentJobPreferJob(?, ?, ?, 0, 2)", array(
+					$talentInfo['hunter_talent_job_Hunter_account'],
+					$talentInfo['hunter_talent_job_Talent_Id'],
+					$talentInfo['job_Id']
+			));
 			if (!$tmpRes)
 			{
 				show_error('数据查询失败，请重试!');
@@ -32,7 +35,6 @@ class Enterprise_home extends CW_Controller
 				$talentInfo['preferJobs'] .= $preferJob['job_type_Des'];
 			}
 			$tmpRes->free_all();
-
 			//P_jobLocations 查询指定项目所在地
 			$tmpRes = $this->db->query("call P_jobLocations(?)", $talentInfo['job_Id']);
 			if (!$tmpRes)
@@ -53,9 +55,7 @@ class Enterprise_home extends CW_Controller
 			{
 				$talentInfo['location_display'] = "多个地点...";
 			}
-
 		}
-
 		//P_activeJobListForEnterprise 查询向此企业开放的职位
 		$tmpRes = $this->db->query("call P_activeJobListForEnterprise(?,null,0,5)", $enterpriseUserAccount);
 		if (!$tmpRes)
@@ -63,7 +63,6 @@ class Enterprise_home extends CW_Controller
 			show_error('数据查询失败，请重试!');
 		}
 		$vars['jobs'] = $tmpRes->result_array();
-
 		$tmpRes->free_all();
 		foreach ($vars['jobs'] as &$job)
 		{
@@ -87,7 +86,6 @@ class Enterprise_home extends CW_Controller
 				$job['location_display'] = "多个地点...";
 			}
 		}
-
 		$vars['page_title'] = '企业首页';
 		$this->load->view('template', $vars);
 	}

@@ -71,13 +71,11 @@
 			$url = site_url('hunter_talent_workExp/saveEditWorkExp').'/'.$displayData['talentId'].'/'.$displayData['company'].'/'.$displayData['position'].'/'.$displayData['startDate'];
 		}
 		echo form_open($url, array('name'=>'formWorkExp'), $tmpAttr);
-		echo <<<HTMLDOC
-	<div class="prepend-1 bord">
-		经历
-	</div>
-	<div class="prepend-1">
-		<label class="append-1">公司名称:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-HTMLDOC;
+		echo "<div class=\"prepend-1 bord\">\n";
+		echo "	经历\n";
+		echo "</div>\n";
+		echo "<div class=\"prepend-1\">\n";
+		echo "	<label class=\"append-1\">公司名称:    </label>";
 		if ($type == 'edit')
 		{
 			$tmpAttr = array('class'=>'text');
@@ -92,11 +90,9 @@ HTMLDOC;
 			);
 			echo form_input($tmpAttr);
 		}
-		echo <<<HTMLDOC
-	</div>
-	<div class="prepend-1">
-		<label class="append-1">在职日期:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-HTMLDOC;
+		echo "</div>";
+		echo '<div class="prepend-1">';
+		echo '	<label class="append-1">在职日期:&nbsp;&nbsp;&nbsp;&nbsp;</label>';
 		if ($type == 'edit')
 		{
 			$tmpAttr = array('class'=>'text');
@@ -112,13 +108,11 @@ HTMLDOC;
 			echo form_input($tmpAttr);
 		}
 		$set_value = 'set_value';
-		echo <<<HTMLDOC
-		<label>至:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		<input name="endDate" value="{$set_value('endDate')}" class='text' />
-	</div>
-	<div class="prepend-1">
-		<label class="append-1">职位:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-HTMLDOC;
+		echo "	<label>至:        </label>\n";
+		echo "	<input name=\"endDate\" value=\"{$set_value('endDate')}\" class='text' />\n";
+		echo "</div>\n";
+		echo "<div class=\"prepend-1\">\n";
+		echo "	<label class=\"append-1\">职位:    </label>";
 		if ($type == 'edit')
 		{
 			$tmpAttr = array('class'=>'text');
@@ -133,29 +127,25 @@ HTMLDOC;
 			);
 			echo form_input($tmpAttr);
 		}
-		echo <<<HTMLDOC
-	</div>
-	<div class="prepend-1">
-		<label class="append-1">最后工资:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		<input name="salary" value="{$set_value('salary')}" class='text' />
-	</div>
-	<div id="reasonTypeDiv" class="prepend-1">
-		<label class="append-1">离职原因:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-HTMLDOC;
+		echo "</div>\n";
+		echo "<div class=\"prepend-1\">\n";
+		echo "	<label class=\"append-1\">最后工资:    </label>\n";
+		echo "	<input name=\"salary\" value=\"{$set_value('salary')}\" class='text' />\n";
+		echo "</div>\n";
+		echo "<div id=\"reasonTypeDiv\" class=\"prepend-1\">\n";
+		echo "	<label class=\"append-1\">离职原因:    </label>";
 		$tmpAttr = 'id = "reasonType" style="width: 300px;"';
 		echo form_dropdown('reasonType', $reasonType, set_value('reasonType'), $tmpAttr);
-		echo <<<HTMLDOC
-	</div>
-	<div id="reasonDetailDiv" class="prepend-1">
-		<textarea name="reasonDetail" class='text' style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; padding-top: 6px; color: #999999; height: 100px;">{$set_value('reasonDetail')}</textarea>
-	</div>
-	<span class="rbs1">
-		<input class="rb1" type="submit" title="查询" value="保存">
-	</span><span class="rbs1">
-		<input class="rb1" type="button" onClick="resetForm();" title="查询" value="重置">
-	</span>
-	<span class="rbs1">
-HTMLDOC;
+		echo "</div>";
+		echo '<div id="reasonDetailDiv" class="prepend-1">';
+		echo '	<textarea name="reasonDetail" class="text" style="width: 198px; padding: 0px; border: 1px solid #7F9CBA; padding-top: 6px; color: #999999; height: 100px;">'.$set_value('reasonDetail').'</textarea>';
+		echo '</div>';
+		echo '<span class="rbs1">';
+		echo '	<input class="rb1" type="submit" title="查询" value="保存">';
+		echo '</span><span class="rbs1">';
+		echo '	<input class="rb1" type="button" onClick="resetForm();" title="查询" value="重置">';
+		echo '</span>';
+		echo '<span class="rbs1">';
 		$tmpAttr = array('class'=>'rb1');
 		echo anchor(site_url('hunter_talent_workExp/displayWorkExp').'/'.$displayData['talentId'], '取消', $tmpAttr);
 		echo form_close();
@@ -189,4 +179,4 @@ HTMLDOC;
 		echo "</pre><br>";
 	}
 	?>
-	</div>
+</div>

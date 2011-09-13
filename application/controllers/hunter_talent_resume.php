@@ -70,7 +70,6 @@ class Hunter_talent_resume extends CW_Controller
 						{
 							$_POST['province'] = $tmpRes->row()->r_province_id;
 							$_POST['city'] = $tmpRes->row()->r_city_id;
-							;
 						}
 					}
 				}

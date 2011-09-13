@@ -1,15 +1,18 @@
 <?php
 if (!defined('BASEPATH'))
-exit('No direct script access allowed');
+	exit('No direct script access allowed');
 class Job_info_to_hunter extends CW_Controller
 {
-	public function index($jobId, $talentOffset=0)
+	public function index($jobId, $talentOffset = 0)
 	{
 		$pageSize = 5;
 		$hunterAccount = $this->session->userdata('user');
 		$vars['content_view'] = 'job_info_to_hunter';
 		//P_activeJobListForHunter 查询指定职位信息
-		$tmpRes = $this->db->query("call P_activeJobListForHunter(?, ?, null, null, null)", array($hunterAccount, $jobId));
+		$tmpRes = $this->db->query("call P_activeJobListForHunter(?, ?, null, null, null)", array(
+				$hunterAccount,
+				$jobId
+		));
 		if (!$tmpRes)
 		{
 			show_error('数据查询失败，请重试!');
@@ -51,7 +54,12 @@ class Job_info_to_hunter extends CW_Controller
 		$config['last_link'] = '>>';
 		$config['anchor_class'] = 'class="blue" ';
 		//P_huntersTalentNotInJobSortByUpdateTime 查询猎头人才库人才信息
-		$tmpRes = $this->db->multi_query("call P_huntersTalentNotInJobSortByUpdateTime(?, ?, null, null, ?,  ?)", array($hunterAccount, $jobId, $talentOffset, $pageSize));
+		$tmpRes = $this->db->multi_query("call P_huntersTalentNotInJobSortByUpdateTime(?, ?, null, null, ?,  ?)", array(
+				$hunterAccount,
+				$jobId,
+				$talentOffset,
+				$pageSize
+		));
 		if (!$tmpRes)
 		{
 			show_error('数据查询失败，请重试!');
@@ -66,11 +74,13 @@ class Job_info_to_hunter extends CW_Controller
 		$tmpRes->free_all();
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
-		
 		foreach ($vars['talentList'] as &$talentInfo)
 		{
 			//P_huntersTalentPreferJob 查询猎头人才的适合职位
-			$tmpRes = $this->db->query("call P_huntersTalentPreferJob(?, ?, 0, 2)", array($hunterAccount, $talentInfo['hunter_talent_Talent_Id']));
+			$tmpRes = $this->db->query("call P_huntersTalentPreferJob(?, ?, 0, 2)", array(
+					$hunterAccount,
+					$talentInfo['hunter_talent_Talent_Id']
+			));
 			if (!$tmpRes)
 			{
 				show_error('数据查询失败，请重试!');

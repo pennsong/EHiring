@@ -1,19 +1,20 @@
 <div class="span-24" style="background-color: #FFFFFF; height: 600px">
-	<div class="span-8 border"
-	style="background-color: #FFFFFF; height: 600px"
-	>
+	<div class="span-8 border" style="background-color: #FFFFFF; height: 600px">
 		<hr class="space" />
 		<?php
 		echo form_open('login/submit_validate');
 		?>
 		<div class="span-10 blue bord prepend-1">
 			用户名:&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="text"
-			value="<?php echo set_value('username');?>" id="search-text"
-			name="username" style="height: 20px"
-			>
+			<input type="text" value="<?php echo set_value('username');?>" id="search-text" name="username" style="height: 20px">
 			<?php
-			$errStr = str_replace(array('<p>', '</p>'), array('', ''), form_error('username'));
+			$errStr = str_replace(array(
+					'<p>',
+					'</p>'
+			), array(
+					'',
+					''
+			), form_error('username'));
 			echo $errStr;
 			?>
 		</div>
@@ -25,7 +26,13 @@
 			style="height: 20px"
 			>
 			<?php
-			$errStr = str_replace(array('<p>', '</p>'), array('', ''), form_error('password'));
+			$errStr = str_replace(array(
+					'<p>',
+					'</p>'
+			), array(
+					'',
+					''
+			), form_error('password'));
 			echo $errStr;
 			?>
 		</div>
@@ -63,3 +70,4 @@
 			<a class="prepend-1" href="#">忘记密码</a>
 		</div>
 	</div>
+</div>
