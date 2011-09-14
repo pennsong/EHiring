@@ -38,7 +38,7 @@ class Enterprise_job extends CW_Controller
 
 	public function saveNewJob()
 	{
-		$this->setValicate();
+		$this->setValidate();
 		if ($this->form_validation->run() == TRUE)
 		{
 			//call P_G_createNewJob 创建新职位
@@ -97,24 +97,11 @@ class Enterprise_job extends CW_Controller
 
 	public function saveEditJob()
 	{
-		$this->setValicate();
+		$this->setValidate();
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->db->trans_start();
-			//处理多location,多degree
-			$tmpRes = $this->db->query("DELETE FROM T_Job_Location WHERE job_location_Job_id = {$this->input->post('jobId')}");
-			if (!$tmpRes)
-			{
-				$this->db->trans_complete();
-				show_error('1数据删除失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
-			}
 			$locationAddList = $this->input->post('location');
-			$tmpRes = $this->db->query("DELETE FROM T_Job_Degree WHERE job_degree_Job_id = {$this->input->post('jobId')}");
-			if (!$tmpRes)
-			{
-				$this->db->trans_complete();
-				show_error('2数据删除失败，请重试!'.$this->db->_error_number().":".$this->db->_error_message());
-			}
 			$degreeAddList = $this->input->post('degree');
 			//call P_updateJob 更新职位信息
 			$tmpParam = array(
@@ -186,6 +173,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['citys'] = array();
+		$vars['citys'][''] = '请选择';
 		foreach ($tmpArray as $cityInfo)
 		{
 			$vars['citys'][$cityInfo['city_Id']] = $cityInfo['city_Name'];
@@ -195,6 +183,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['jobTypes'] = array();
+		$vars['jobTypes'][''] = '请选择';
 		foreach ($tmpArray as $jobType)
 		{
 			$vars['jobTypes'][$jobType['job_type_Id']] = $jobType['job_type_Des'];
@@ -204,6 +193,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['degrees'] = array();
+		$vars['degrees'][''] = '请选择';
 		foreach ($tmpArray as $degree)
 		{
 			$vars['degrees'][$degree['degree_Id']] = $degree['degree_Des'];
@@ -213,6 +203,7 @@ class Enterprise_job extends CW_Controller
 		$tmpArray = $tmpRes->result_array();
 		$tmpRes->free_all();
 		$vars['commissionTypes'] = array();
+		$vars['commissionTypes'][''] = '请选择';
 		foreach ($tmpArray as $commissionType)
 		{
 			$vars['commissionTypes'][$commissionType['commission_type_Id']] = $commissionType['commission_type_Des'];
@@ -221,7 +212,7 @@ class Enterprise_job extends CW_Controller
 		$this->load->view('template', $vars);
 	}
 
-	private function setValicate()
+	private function setValidate()
 	{
 		$this->load->library('form_validation');
 		$config = array(
@@ -233,7 +224,7 @@ class Enterprise_job extends CW_Controller
 				array(
 						'field'=>'location',
 						'label'=>'工作地点',
-						'rules'=>'required'
+						'rules'=>'trim|required'
 				),
 				array(
 						'field'=>'jobType',
@@ -307,7 +298,7 @@ class Enterprise_job extends CW_Controller
 		{
 			if ($tmpRes->num_rows() == 0)
 			{
-				$this->generalInfo = '未找到相应记录';
+				//todo 处理没有查到所要编辑记录状况
 			}
 			else
 			{

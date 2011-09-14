@@ -95,22 +95,3 @@
 		</div>
 	</div>
 </div>
-</div>
-<p style="margin-top: 100px">
-	<a target="_blank" href=""><img width="263" vspace="2" height="88" border="“0&quot;" src="<?php echo base_url()?>/adpic/20109281756310.gif" alt="无添加贸易（上海）有限公司"> </a>
-	<br>
-	<a target="_blank" href=""><img width="263" vspace="2" height="88" border="“0&quot;" src="<?php echo base_url()?>/adpic/20114251524060.gif" alt="阿迪达斯体育（中国）有限公司"> </a>
-	<br>
-	<a target="_blank" href=""><img width="263" vspace="2" height="88" border="“0&quot;" src="<?php echo base_url()?>/adpic/20113171005410.gif" alt="巴罗克（上海）贸易有限公司"> </a>
-	<br>
-	<a target="_blank" href=""><img width="263" vspace="2" height="44" border="“0&quot;" src="<?php echo base_url()?>/adpic/20117191652090.jpg" alt="哈森商贸（中国）有限公司"> </a>
-	<br>
-	<a target="_blank" href=""><img width="263" vspace="2" height="44" border="“0&quot;" src="<?php echo base_url()?>/adpic/2011341514200.gif" alt="爱思开实业（上海）商贸有限公司"> </a>
-	<br>
-	<a target="_blank" href=""><img width="263" vspace="2" height="44" border="“0&quot;" src="<?php echo base_url()?>/adpic/20114151055340.gif"
-	alt="上海苏宁电器有限公司"
-	> </a>
-	<br>
-</p>
-</div>
-</div> 

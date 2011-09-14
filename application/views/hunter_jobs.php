@@ -42,7 +42,8 @@
 	}
 	?>
 	<div class="span-18 prepend-7">
-	<?php echo $this->pagination->create_links();?>
+		<?php echo $this->pagination->create_links();?>
 	</div>
 	<hr class="space" />
 	<hr />
+</div>

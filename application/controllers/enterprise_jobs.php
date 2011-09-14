@@ -1,24 +1,24 @@
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-class Hunter_jobs extends CW_Controller
+class Enterprise_jobs extends CW_Controller
 {
 	public function index($offset = 0)
 	{
 		$pageSize = 10;
-		$vars['nowPage'] = 'hunterJobs';
-		$vars['content_view'] = 'hunter_jobs';
+		$vars['nowPage'] = 'enterpriseJobs';
+		$vars['content_view'] = 'enterprise_jobs';
 		$vars['navigation_menu'] = 'navigation_menu';
-		$hunterAccount = $this->session->userdata('user');
-		$config['base_url'] = site_url('hunter_jobs/index');
+		$enterpriseAccount = $this->session->userdata('user');
+		$config['base_url'] = site_url('enterprise_jobs/index');
 		$config['per_page'] = $pageSize;
 		$config['uri_segment'] = '3';
 		$config['first_link'] = '<<';
 		$config['last_link'] = '>>';
 		$config['anchor_class'] = 'class="blue" ';
-		//P_activeJobListForHunter 查询向此猎头开放的职位
-		$tmpRes = $this->db->query("call P_activeJobListForHunter(?,null,null,?,?)", array(
-				$hunterAccount,
+		//P_activeJobListForEnterprise 查询该企业用户的职位
+		$tmpRes = $this->db->multi_query("call P_activeJobListForEnterprise(?,null,?,?)", array(
+				$enterpriseAccount,
 				$offset,
 				$pageSize
 		));
@@ -36,9 +36,10 @@ class Hunter_jobs extends CW_Controller
 		$tmpRes->free_all();
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
+		//P_jobLocations 查询指定职位的location
 		foreach ($vars['jobs'] as &$job)
 		{
-			$tmpRes = $this->db->query("call P_jobLocations(?)", $job['job_Id']);
+			$tmpRes = $this->db->multi_query("call P_jobLocations(?)", $job['job_Id']);
 			if (!$tmpRes)
 			{
 				show_error('数据查询失败，请重试!');
