@@ -30,6 +30,7 @@
 						<th class="span-1">
 						<input type="checkbox" />
 						</th>
+						<th class="span-2">用户名</th>
 						<th class="span-2">姓名</th>
 						<th class="span-3">应聘职位</th>
 						<th class="span-2">项目所在地</th>
@@ -58,8 +59,9 @@
 						}
 						echo "	<td><input type=\"checkbox\" />\n";
 						echo "	</td>\n";
-						echo "	<td><a href=\"\">{$submit_update['hunter_talent_job_Talent_name']}</a>\n";
+						echo "	<td><a href=\"\">{$submit_update['hunter_talent_job_Talent_Id']}</a>\n";
 						echo "	</td>\n";
+						echo "	<td>{$submit_update['hunter_talent_job_Talent_name']}</td>\n";
 						echo "	<td><a href=\"\">{$submit_update['job_Title']}</a>\n";
 						echo "	</td>\n";
 						echo "	<td>{$submit_update['location_display']}</td>\n";
@@ -69,8 +71,14 @@
 						echo "	<td>{$submit_update['hunter_talent_job_submit_status_Des']}</td>\n";
 						echo "	<td>{$submit_update['R_star']}</td>\n";
 						echo "	<td>{$submit_update['preferJobs']}</td>\n";
-						echo "	<td><a href=\"\">选择</a>    <a href=\"\">拒绝</a>\n";
-						echo "	</td>\n";
+						if ($submit_update['hunter_talent_job_Status'] == 1)
+						{
+							echo "	<td>".anchor(site_url('enterprise_submit_update/chooseTalent').'/'.$offset.'/'.$submit_update['hunter_talent_job_Hunter_account'].'/'.$submit_update['hunter_talent_job_Talent_Id'].'/'.$submit_update['job_Id'].'/'.'2', '选择')."  ".anchor(site_url('enterprise_submit_update/chooseTalent').'/'.$offset.'/'.$submit_update['hunter_talent_job_Hunter_account'].'/'.$submit_update['hunter_talent_job_Talent_Id'].'/'.$submit_update['job_Id'].'/'.'3', '拒绝')."</td>\n";
+						}
+						else
+						{
+							echo "<td></td>\n";
+						}
 						echo "</tr>";
 					}
 					?>

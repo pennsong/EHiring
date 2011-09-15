@@ -90,6 +90,39 @@ class Enterprise_home extends CW_Controller
 		$this->load->view('template', $vars);
 	}
 
+	public function chooseTalent($hunterAccount, $talentId, $jobId, $statusId)
+	{
+		//CALL F_updateHunterTalentJobStatus 更新工作推荐状态
+		$this->db->trans_start();
+		$tmpRes = $this->db->query("SELECT F_updateHunterTalentJobStatus(?, ?, ?, ?) Result", array(
+				$hunterAccount,
+				$talentId,
+				$jobId,
+				$statusId
+		));
+		if (!$tmpRes)
+		{
+			$this->db->trans_rollback();
+			show_error('数据插入失败，请重试!');
+		}
+		else
+		{
+			$tmpResult = $tmpRes->result_array();
+			$tmpRes->free_all();
+			if ($tmpResult[0]['Result'] == 1)
+			{
+				$this->db->trans_commit();
+				echo "状态更新成功!";
+			}
+			else
+			{
+				$this->db->trans_rollback();
+				echo "状态更新失败!";
+			}
+			$this->index();
+		}
+	}
+
 }
 
 /* End of file welcome.php */

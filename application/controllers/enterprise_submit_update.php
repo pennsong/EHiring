@@ -6,6 +6,7 @@ class enterprise_submit_update extends CW_Controller
 	public function index($offset = 0)
 	{
 		$pageSize = 10;
+		$vars['offset'] = $offset;
 		$vars['nowPage'] = 'enterpriseSubmitUpdate';
 		$vars['page_title'] = '人员动态';
 		$vars['content_view'] = 'enterprise_submit_update';
@@ -79,6 +80,39 @@ class enterprise_submit_update extends CW_Controller
 		$this->load->library('pagination');
 		$this->pagination->initialize($config);
 		$this->load->view('template', $vars);
+	}
+
+	public function chooseTalent($offset, $hunterAccount, $talentId, $jobId, $statusId)
+	{
+		//CALL F_updateHunterTalentJobStatus 更新工作推荐状态
+		$this->db->trans_start();
+		$tmpRes = $this->db->query("SELECT F_updateHunterTalentJobStatus(?, ?, ?, ?) Result", array(
+				$hunterAccount,
+				$talentId,
+				$jobId,
+				$statusId
+		));
+		if (!$tmpRes)
+		{
+			$this->db->trans_rollback();
+			show_error('数据插入失败，请重试!');
+		}
+		else
+		{
+			$tmpResult = $tmpRes->result_array();
+			$tmpRes->free_all();
+			if ($tmpResult[0]['Result'] == 1)
+			{
+				$this->db->trans_commit();
+				echo "状态更新成功!";
+			}
+			else
+			{
+				$this->db->trans_rollback();
+				echo "状态更新失败!";
+			}
+			$this->index($offset);
+		}
 	}
 
 }
