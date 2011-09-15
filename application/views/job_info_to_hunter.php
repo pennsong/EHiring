@@ -84,6 +84,7 @@
 						<th class="span-1">
 						<input type="checkbox" />
 						</th>
+						<th class="span-1">用户名</th>
 						<th class="span-1">姓名</th>
 						<th class="span-1">年龄</th>
 						<th class="span-1">性别</th>
@@ -111,7 +112,8 @@
 						echo "<td>\n";
 						echo "<input type=\"checkbox\" />\n";
 						echo "</td>\n";
-						echo "<td><a href=\"\">{$talentInfo['hunter_talent_Talent_Name']} </a></td>\n";
+						echo "<td><a href=\"\">{$talentInfo['hunter_talent_Talent_Id']} </a></td>\n";
+						echo "<td>{$talentInfo['hunter_talent_Talent_Name']}</td>\n";
 						echo "<td>{$talentInfo['R_age']}</td>\n";
 						echo "<td>{$talentInfo['sex_Name']} </td>\n";
 						echo "<td>{$talentInfo['R_city_name']} </td>\n";
@@ -119,7 +121,7 @@
 						echo "<td>{$talentInfo['hunter_talent_Talent_qq']}</td>\n";
 						echo "<td>{$talentInfo['R_star']} </td>\n";
 						echo "<td>{$talentInfo['preferJobs']}</td>\n";
-						echo "<td><a href=\"\">看简历</a>    <a href=\"\">推荐</a></td>\n";
+						echo "<td><a href=\"\">看简历</a>  ".anchor(site_url('job_info_to_hunter/recommend/'.$talentInfo['hunter_talent_Talent_Id'].'/'.$jobInfo[0]['job_Id'].'/'.$talentOffset), '推荐')."</td>\n";
 						echo "</tr>";
 					}
 					?>

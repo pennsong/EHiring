@@ -27,6 +27,7 @@
 			<table>
 				<thead>
 					<tr>
+						<th class="span-2">用户名</th>
 						<th class="span-2">姓名</th>
 						<th class="span-3">人才所在城市</th>
 						<th class="span-3">应聘职位</th>
@@ -50,7 +51,8 @@
 						{
 							echo '<tr>'."\n";
 						}
-						echo "	<td><a href=\"\">{$submit_update['hunter_talent_job_Talent_name']}</a></td>\n";
+						echo "	<td><a href=\"\">{$submit_update['hunter_talent_job_Talent_Id']}</a></td>\n";
+						echo "	<td>{$submit_update['hunter_talent_job_Talent_name']}</td>\n";
 						echo "	<td>{$submit_update['R_city']}</td>\n";
 						echo "	<td><a href=\"\">{$submit_update['job_Title']}</a></td>\n";
 						echo "	<td>{$submit_update['R_age']}</td>\n";

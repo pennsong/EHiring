@@ -6,6 +6,7 @@ class Job_info_to_hunter extends CW_Controller
 	public function index($jobId, $talentOffset = 0)
 	{
 		$pageSize = 5;
+		$vars['talentOffset'] = $talentOffset;
 		$hunterAccount = $this->session->userdata('user');
 		$vars['content_view'] = 'job_info_to_hunter';
 		//P_activeJobListForHunter 查询指定职位信息
@@ -94,6 +95,38 @@ class Job_info_to_hunter extends CW_Controller
 		}
 		$vars['page_title'] = '职位信息';
 		$this->load->view('template', $vars);
+	}
+
+	public function recommend($talentId, $jobId, $talentOffset = 0)
+	{
+		//call F_G_createNewHunterTalentJob
+		$this->db->trans_start();
+		$tmpRes = $this->db->query("SELECT F_G_createNewHunterTalentJob(?, ?, ?) Result", array(
+				$this->session->userdata['user'],
+				$talentId,
+				$jobId
+		));
+		if (!$tmpRes)
+		{
+			$this->db->trans_rollback();
+			show_error('数据插入失败，请重试!');
+		}
+		else
+		{
+			$tmpResult = explode('@', $tmpRes->row()->Result);
+			$tmpRes->free_all();
+			if ($tmpResult[0] == 'SUCCESS')
+			{
+				echo $tmpResult[0].":".$tmpResult[1];
+				$this->db->trans_commit();
+			}
+			else
+			{
+				$this->db->trans_rollback();
+				echo $tmpResult[0].":".$tmpResult[1];
+			}
+			$this->index($jobId, $talentOffset);
+		}
 	}
 
 }
