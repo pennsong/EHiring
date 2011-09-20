@@ -162,8 +162,8 @@ class Hunter_talent_workExp extends CW_Controller
 		$tmpParam = array(
 				$this->session->userdata('user'),
 				$talentId,
-				$company,
-				$position,
+				rawurldecode($company),
+				rawurldecode($position),
 				$this->convertToDate($startDate)
 		);
 		$tmpRes = $this->db->query('CALL P_getHunterTalentWorkExp(?,?,?,?,?)', $tmpParam);
