@@ -3276,13 +3276,13 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = '' */ ;
 DELIMITER ;;
-/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `P_huntersTalentPreferJob`(IN_hunterAccount VARCHAR(20), IN_talentId INT(11), IN_offset INT(11), IN_limit INT(11))
+/*!50003 CREATE*/ /*!50020 DEFINER=`root`@`localhost`*/ /*!50003 PROCEDURE `P_huntersTalentPreferJob`(IN_hunterAccount VARCHAR(20), IN_talentId VARCHAR(11), IN_offset INT(11), IN_limit INT(11))
     COMMENT '接收参数IN_hunterAccount VARCHAR(20), IN_talentId INT(11)，对于指定hunter的talent找出适合其工作的工作类型'
 BEGIN
 DECLARE offsetNum INT(11);
 DECLARE limitNum INT(11);
 DECLARE hunterAccount VARCHAR(20);
-DECLARE talentId INT(11);
+DECLARE talentId VARCHAR(11);
 
 IF (IN_offset IS NULL) THEN
 	SET offsetNum = 0;
@@ -3953,4 +3953,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2011-09-26 17:33:11
+-- Dump completed on 2011-09-26 18:09:51
